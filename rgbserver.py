@@ -23,7 +23,7 @@ def updateColor(color, step):
     return color
 
 def setLights(pin, brightness):
-	realBrightness = int(int(brightness) * (float(bright) / 255.0))
+	realBrightness = int(brightness)
 	pi.set_PWM_dutycycle(pin, realBrightness)
 
 setLights(RED_PIN, 63)
