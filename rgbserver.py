@@ -39,7 +39,6 @@ def homepage():
 
 @app.route('/set', methods=['POST'])
 def setColor():
-    color = request.get_json()
     print(color)
     setLights(color.r)
     setLights(color.g)
