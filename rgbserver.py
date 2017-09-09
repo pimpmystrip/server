@@ -37,8 +37,8 @@ def setLights(pin, brightness):
 def homepage():
     return 'Pi RGB Server'
 
-@app.route('/set/<rgbdata>', methods=['GET', 'POST'])
-def setColor(rgbdata):
+@app.route('/set', methods=['GET', 'POST'])
+def setColor():
     color = request.json
     print(color)
     setLights(color.r)
