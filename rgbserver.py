@@ -26,8 +26,6 @@ def setLights(pin, brightness):
 	realBrightness = int(int(brightness) * (float(bright) / 255.0))
 	pi.set_PWM_dutycycle(pin, realBrightness)
 
-rgb(63,81,181)
-
 setLights(RED_PIN, 63)
 setLights(GREEN_PIN, 81)
 setLights(BLUE_PIN, 181)
