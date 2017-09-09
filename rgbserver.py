@@ -4,6 +4,9 @@ import termios
 import tty
 import pigpio
 import time
+from flask import Flask, request
+
+app = Flask(__name__)
 
 # Pin numbers
 RED_PIN = 17
@@ -23,12 +26,26 @@ def updateColor(color, step):
     return color
 
 def setLights(pin, brightness):
-	realBrightness = int(brightness)
-	pi.set_PWM_dutycycle(pin, realBrightness)
+    if brightness < 0:
+        brightness = 0
+    if brightness > 255:
+        brightness = 255
 
-setLights(RED_PIN, 63)
-setLights(GREEN_PIN, 81)
-setLights(BLUE_PIN, 181)
+	pi.set_PWM_dutycycle(pin, int(realBrightness))
 
-time.sleep(0.5)
-pi.stop()
+@app.route('/')
+def homepage():
+    return 'Pi RGB Server'
+
+@app.route('/set/<rgbdata>', methods=['GET', 'POST'])
+def setColor(rgbdata):
+    color = request.json
+    print(color)
+    setLights(color.r)
+    setLights(color.g)
+    setLights(color.b)
+
+if __name__ == '__main__':
+      app.run(host='0.0.0.0', port=8008)
+
+#pi.stop()
