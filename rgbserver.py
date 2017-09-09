@@ -15,6 +15,7 @@ BLUE_PIN = 24
 
 pi = pigpio.pi()
 
+
 def updateColor(color, step):
     color += step
 
@@ -25,26 +26,32 @@ def updateColor(color, step):
 
     return color
 
+
 def setLights(pin, brightness):
     if brightness < 0:
         brightness = 0
     if brightness > 255:
         brightness = 255
 
-	pi.set_PWM_dutycycle(pin, int(realBrightness))
+        pi.set_PWM_dutycycle(pin, int(realBrightness))
+
 
 @app.route('/')
 def homepage():
     return 'Pi RGB Server'
 
+
 @app.route('/set', methods=['POST'])
 def setColor():
+    color = request.get_json()
     print(color)
-    setLights(color.r)
-    setLights(color.g)
-    setLights(color.b)
+    setLights(RED_PIN, color['r'])
+    setLights(GREEN_PIN, color['g'])
+    setLights(BLUE_PIN, color['b'])
+
+    return 'true'
 
 if __name__ == '__main__':
-      app.run(host='0.0.0.0', port=8008)
+    app.run(host='0.0.0.0', port=8008)
 
-#pi.stop()
+# pi.stop()
