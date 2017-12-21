@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "global": "^4.3.2",
+    "nodemon": "^1.14.0",
+    "pigpio": "^0.6.3",
+    "pigpio-components": "^1.1.1",
+    "socket.io": "^2.0.4"
+  }
+}
